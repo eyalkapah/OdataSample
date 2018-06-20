@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using Microsoft.OData.Edm;
 using OdataSample.App.Models;
 using OdataSample.App.Services;
@@ -20,6 +22,9 @@ namespace OdataSample.App
 {
     public class Startup
     {
+        public static readonly LoggerFactory MyLoggerFactory
+            = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -44,7 +49,7 @@ namespace OdataSample.App
 
             var connectionString = Configuration.GetConnectionString("MondialDbContext");
 
-            services.AddDbContext<MondialDbContext>(builder => builder.UseSqlServer(connectionString));
+            services.AddDbContext<MondialDbContext>(builder => builder.UseSqlServer(connectionString).UseLoggerFactory(MyLoggerFactory));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

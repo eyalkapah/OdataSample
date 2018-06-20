@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.0.0-Nightly201806111242" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.0.0-Nightly201806192313" />
   </ItemGroup>
 
 </Project>
